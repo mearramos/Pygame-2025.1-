@@ -3,24 +3,16 @@ from os import path
 import os
 
 
-# from config import WIDTH, HEIGHT, FPS, WHITE, BLACK
-
-WIDTH = 1000  # Largura da tela
-HEIGHT = 750  # Altura da tela
-FPS = 30 # Frames por segundo
-
-WHITE = (255, 255, 255)
-BLACK = (0, 0, 0)
-RED = (255, 0, 0)
-GREEN = (0, 255, 0)
-BLUE = (0, 0, 255)
-YELLOW = (255, 255, 0)
+from config import WIDTH, HEIGHT, FPS, WHITE, BLACK
 
 pygame.init()
 
 # ----- Gera tela principal
 window = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption('Nome do jogo')
+
+image = pygame.image.load('assets/sky.png').convert()
+background = pygame.transform.scale(image, (WIDTH, HEIGHT))
 
 
 titulo = "Nome do jogo"
@@ -34,9 +26,8 @@ while game:
         # ----- Verifica consequências
         if event.type == pygame.QUIT: # ------ Se o evento for um click no "X"
             game = False              # ------ Sai do jogo
-    
-    window.fill(BLACK)
 
+    window.blit(background, (0, 0))
     pygame.display.update()
 
 pygame.quit()
