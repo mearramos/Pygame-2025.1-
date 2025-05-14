@@ -24,7 +24,7 @@ def aminacao_passaro(pasta):
         frames.append(imagem)
     return frames
 
-class Ship(pygame.sprite.Sprite):
+class passaro(pygame.sprite.Sprite):
     def __init__(self, frames):
         pygame.sprite.Sprite.__init__(self)
 
@@ -32,11 +32,15 @@ class Ship(pygame.sprite.Sprite):
         self.frame_index = 0
         self.image = pygame.transform.scale(self.frames[self.frame_index], (BIRD_WIDTH, BIRD_HEIGHT))
         self.rect = self.image.get_rect()
-        self.rect.centerx = WIDTH / 2
+        self.rect.centerx = 240
         self.rect.bottom = HEIGHT - 10
         self.speedx = 0
         self.last_update = pygame.time.get_ticks()
         self.frame_rate = 1000 // fps_animacao
+        self.speedx = 0
+        self.speedy = 0
+        self.gravity = 0.0101 # ----- É possível deixar mais lento?
+        self.jump_strength = -0.9
 
     def update(self):
         now = pygame.time.get_ticks()
@@ -45,12 +49,29 @@ class Ship(pygame.sprite.Sprite):
             self.frame_index = (self.frame_index + 1) % len(self.frames)
             self.image = pygame.transform.scale(self.frames[self.frame_index], (BIRD_WIDTH, BIRD_HEIGHT))
 
-        # Movimento
+        if self.speedy > 10:
+            self.speedy = 10
+
         self.rect.x += self.speedx
         if self.rect.right > WIDTH:
             self.rect.right = WIDTH
         if self.rect.left < 0:
             self.rect.left = 0
+
+        keys = pygame.key.get_pressed()
+        if keys[pygame.K_SPACE]:
+            self.speedy = self.jump_strength
+        else:
+            self.speedy += self.gravity
+
+        self.rect.y += self.speedy
+
+        if self.rect.top < 0:
+            self.rect.top = 0
+            # self.speedy = 0
+        if self.rect.bottom > HEIGHT:
+            self.rect.bottom = HEIGHT
+            self.speedy = 0
 
 
 fps_animacao = 10
@@ -59,7 +80,7 @@ frames = aminacao_passaro(pasta_animacao)
 indice_frame = 0
 tempo_ultimo_frame = pygame.time.get_ticks()
 
-player = Ship(frames)
+player = passaro(frames)
 all_sprites = pygame.sprite.Group()
 all_sprites.add(player)
 
@@ -73,6 +94,9 @@ while game:
             game = False
         elif event.type == pygame.KEYDOWN and event.key == pygame.K_RETURN:
             start = True
+        keys = pygame.key.get_pressed()
+        if keys[pygame.K_SPACE]:
+            player.speedy = player.jump_strength
 
     agora = pygame.time.get_ticks()
     if agora - tempo_ultimo_frame > 1000 // fps_animacao:
