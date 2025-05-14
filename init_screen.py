@@ -14,9 +14,6 @@ pygame.display.set_caption('Tappy Wings')
 image = pygame.image.load('assets/sky.png').convert()
 background = pygame.transform.scale(image, (WIDTH, HEIGHT))
 
-logo = pygame.image.load('assets/logo_tappy_wings.png').convert()
-logo_pos = pygame.transform.scale(logo, (400, 300))
-logo_rect = logo.get_rect(center= (WIDTH//2, HEIGHT//2 - 40))
 
 # ----- Define fonte e mensagens
 font = pygame.font.Font('assets/fonte_principal.ttf', 34)
@@ -45,7 +42,6 @@ while game and not start:
     window.blit(background, (0, 0))
     window.blit(text_title, title_rect)
     window.blit(text_msg, msg_rect)
-    window.blit(logo_pos, logo_rect)
     pygame.display.update()
 
 pygame.quit()
