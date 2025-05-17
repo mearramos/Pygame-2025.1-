@@ -7,10 +7,16 @@ from config import WIDTH, HEIGHT, FPS, WHITE, BLACK, BLUE
 BIRD_WIDTH = 70
 BIRD_HEIGHT = 108
 
+pygame.init()
+
 window = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption('Tappy Wings')
 
-image = pygame.image.load('assets/img/sky.png').convert()
+
+
+font = pygame.font.Font('assets/fonte/fonte_principal.ttf', 25)
+
+image = pygame.image.load('assets/img/landscape_fixed_backgrounds_-_morning.png').convert()
 background = pygame.transform.scale(image, (WIDTH, HEIGHT))
 
 bird = pygame.image.load('assets/img/idle/frame-1.png').convert_alpha()
@@ -39,8 +45,8 @@ class passaro(pygame.sprite.Sprite):
         self.frame_rate = 1000 // fps_animacao
         self.speedx = 0
         self.speedy = 0
-        self.gravity = 0.0101 # ----- É possível deixar mais lento?
-        self.jump_strength = -0.9
+        self.gravity = 0.005 
+        self.jump_strength = -0.9 # ----- É possível deixar mais lento?
 
     def update(self):
         now = pygame.time.get_ticks()
@@ -88,6 +94,10 @@ clock = pygame.time.Clock()
 game = True
 start = True
 
+start_ticks = pygame.time.get_ticks()
+
+fundo_estado = "manha"
+
 while game:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -105,8 +115,24 @@ while game:
 
     all_sprites.update()
 
+    segundos_totais = (pygame.time.get_ticks() - start_ticks) // 1000
+    minutos = segundos_totais // 60
+    segundos = segundos_totais % 60
+    texto_tempo = font.render(f"Tempo: {minutos:02}:{segundos:02}", True, BLACK)
+
+    if segundos >= 45 and fundo_estado != "noite":
+        image = pygame.image.load('assets/img/landscape_fixed_backgrounds_-_night.png').convert()
+        background = pygame.transform.scale(image, (WIDTH, HEIGHT))
+        fundo_estado = "noite"
+
+    elif segundos >= 30 and fundo_estado == "manha":
+        image = pygame.image.load('assets/img/landscape_fixed_backgrounds_-_evening.png').convert()
+        background = pygame.transform.scale(image, (WIDTH, HEIGHT))
+        fundo_estado = "entardecer"
+
     window.blit(background, (0, 0))
     all_sprites.draw(window)
+    window.blit(texto_tempo, (10, 10))
     pygame.display.update()
 
 pygame.quit()
