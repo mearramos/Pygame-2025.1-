@@ -16,7 +16,7 @@ pygame.display.set_caption('Tappy Wings')
 
 font = pygame.font.Font('assets/fonte/fonte_principal.ttf', 25)
 
-image = pygame.image.load('assets/img/landscape_fixed_backgrounds_-_morning.png').convert()
+image = pygame.image.load('assets/img/fase1.png').convert()
 background = pygame.transform.scale(image, (WIDTH, HEIGHT))
 
 bird = pygame.image.load('assets/img/idle/frame-1.png').convert_alpha()
