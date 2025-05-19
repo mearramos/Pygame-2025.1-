@@ -74,7 +74,6 @@ class passaro(pygame.sprite.Sprite):
 
         if self.rect.top < 0:
             self.rect.top = 0
-            # self.speedy = 0
         if self.rect.bottom > HEIGHT:
             self.rect.bottom = HEIGHT
             self.speedy = 0
@@ -118,17 +117,7 @@ while game:
     segundos_totais = (pygame.time.get_ticks() - start_ticks) // 1000
     minutos = segundos_totais // 60
     segundos = segundos_totais % 60
-    texto_tempo = font.render(f"Tempo: {minutos:02}:{segundos:02}", True, BLACK)
-
-    if segundos >= 45 and fundo_estado != "noite":
-        image = pygame.image.load('assets/img/landscape_fixed_backgrounds_-_night.png').convert()
-        background = pygame.transform.scale(image, (WIDTH, HEIGHT))
-        fundo_estado = "noite"
-
-    elif segundos >= 30 and fundo_estado == "manha":
-        image = pygame.image.load('assets/img/landscape_fixed_backgrounds_-_evening.png').convert()
-        background = pygame.transform.scale(image, (WIDTH, HEIGHT))
-        fundo_estado = "entardecer"
+    texto_tempo = font.render(f"Tempo: {minutos:02}:{segundos:02}", True, BLUE)
 
     window.blit(background, (0, 0))
     all_sprites.draw(window)
