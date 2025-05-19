@@ -4,8 +4,8 @@ import os
 
 from config import WIDTH, HEIGHT, FPS, WHITE, BLACK, BLUE
 
-BIRD_WIDTH = 70
-BIRD_HEIGHT = 108
+BIRD_WIDTH = 90
+BIRD_HEIGHT = 130
 
 pygame.init()
 
