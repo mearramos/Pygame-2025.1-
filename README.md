@@ -8,7 +8,8 @@
 
 ## Autores
 
-- [@mearramos](https://www.github.com/mearramos): Maria Eduarda Ramos Silva
+- [@mearramos](https://www.github.com/mearramos): Maria Ramos 
+- [@xXFelipeBrownieXx](https://github.com/xXFelipeBrownieXx): Felipe 
 
 
 ## Como rodar o código?
