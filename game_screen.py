@@ -95,7 +95,7 @@ start = True
 
 start_ticks = pygame.time.get_ticks()
 
-fundo_estado = "manha"
+fundo_estado = "nivel_1"
 
 while game:
     for event in pygame.event.get():
@@ -118,6 +118,17 @@ while game:
     minutos = segundos_totais // 60
     segundos = segundos_totais % 60
     texto_tempo = font.render(f"{minutos:02}:{segundos:02}", True, DARK_BLUE)
+
+    if segundos >= 45 and not fundo_estado == "nivel_2" and not fundo_estado == "nivel_3":
+        image = pygame.image.load('assets/img/fase2.png').convert()
+        background = pygame.transform.scale(image, (WIDTH, HEIGHT))
+        fundo_estado = "nivel_2"
+
+    elif (minutos == 1 and segundos >= 30) and not fundo_estado == "nivel_3":
+        image = pygame.image.load('assets/img/fase3.png').convert()
+        background = pygame.transform.scale(image, (WIDTH, HEIGHT))
+        fundo_estado = "nivel_3"
+
 
     window.blit(background, (0, 0))
     all_sprites.draw(window)
