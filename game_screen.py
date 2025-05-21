@@ -2,7 +2,7 @@ import pygame
 from os import path
 import os
 
-from config import WIDTH, HEIGHT, FPS, WHITE, BLACK, BLUE
+from config import WIDTH, HEIGHT, FPS, WHITE, BLACK, BLUE, DARK_BLUE
 
 BIRD_WIDTH = 90
 BIRD_HEIGHT = 130
@@ -117,7 +117,7 @@ while game:
     segundos_totais = (pygame.time.get_ticks() - start_ticks) // 1000
     minutos = segundos_totais // 60
     segundos = segundos_totais % 60
-    texto_tempo = font.render(f"Tempo: {minutos:02}:{segundos:02}", True, BLUE)
+    texto_tempo = font.render(f"{minutos:02}:{segundos:02}", True, DARK_BLUE)
 
     window.blit(background, (0, 0))
     all_sprites.draw(window)
