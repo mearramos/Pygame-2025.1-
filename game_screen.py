@@ -1,8 +1,9 @@
 import pygame
 from os import path
 import os
+import random
 
-from config import WIDTH, HEIGHT, FPS, WHITE, BLACK, BLUE, DARK_BLUE
+from config import WIDTH, HEIGHT, FPS, WHITE, BLACK, BLUE, DARK_BLUE, RED
 
 BIRD_WIDTH = 90
 BIRD_HEIGHT = 130
@@ -11,8 +12,18 @@ pygame.init()
 
 window = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption('Tappy Wings')
+cano_x = WIDTH
 
+pipe_top = pygame.image.load("assets/img/pipe_top.png")
+pipe_bottom = pygame.image.load("assets/img/pipe_bottom.png")
 
+mask_pipe_top = pygame.mask.from_surface(pipe_top)
+mask_pipe_bottom = pygame.mask.from_surface(pipe_bottom)
+
+pipe_width = pipe_top.get_width()
+gap_pipe = 300
+
+pipe_x = WIDTH
 
 font = pygame.font.Font('assets/fonte/fonte_principal.ttf', 25)
 
@@ -45,8 +56,10 @@ class passaro(pygame.sprite.Sprite):
         self.frame_rate = 1000 // fps_animacao
         self.speedx = 0
         self.speedy = 0
-        self.gravity = 0.005 
-        self.jump_strength = -0.9 # ----- É possível deixar mais lento?
+        self.gravity = 0.004491 
+        self.jump_strength = -0.7 #cariavel diminuida pra melhorar a jogabilidade e não dar um pulo muito alto
+
+        self.mask = pygame.mask.from_surface(self.image)
 
     def update(self):
         now = pygame.time.get_ticks()
@@ -54,6 +67,7 @@ class passaro(pygame.sprite.Sprite):
             self.last_update = now
             self.frame_index = (self.frame_index + 1) % len(self.frames)
             self.image = pygame.transform.scale(self.frames[self.frame_index], (BIRD_WIDTH, BIRD_HEIGHT))
+            self.mask = pygame.mask.from_surface(self.image)
 
         if self.speedy > 10:
             self.speedy = 10
@@ -78,6 +92,23 @@ class passaro(pygame.sprite.Sprite):
             self.rect.bottom = HEIGHT
             self.speedy = 0
 
+class Cano(pygame.sprite.Sprite):
+    def __init__(self, image, x, y):
+        super().__init__()
+        self.image = image
+        self.rect = self.image.get_rect(topleft=(x, y))
+        self.mask = pygame.mask.from_surface(self.image)
+
+    def update(self):
+        self.rect.x -= 0.5
+        if self.rect.right < 0:
+            self.rect.left = WIDTH
+
+
+def gerar_altura():
+    return random.randint(100, HEIGHT - gap_pipe - 100)
+
+altura_cano_cima = gerar_altura()
 
 fps_animacao = 10
 pasta_animacao = 'assets/img/idle'
@@ -128,11 +159,37 @@ while game:
         image = pygame.image.load('assets/img/fase3.png').convert()
         background = pygame.transform.scale(image, (WIDTH, HEIGHT))
         fundo_estado = "nivel_3"
+    
+    cano_x -= 0.5
+
+    if cano_x + pipe_width < 0:
+        cano_x = WIDTH
+        altura_cano_cima = gerar_altura()
+
+    window.fill((135, 206, 250))  
+
+    pos_cano_cima = (cano_x, altura_cano_cima - pipe_top.get_height())
+    pos_cano_baixo = (cano_x, altura_cano_cima + gap_pipe)
 
 
     window.blit(background, (0, 0))
     all_sprites.draw(window)
     window.blit(texto_tempo, (10, 10))
+    window.blit(pipe_top, pos_cano_cima)
+    window.blit(pipe_bottom, pos_cano_baixo)
+
+    offset_cima = (int(cano_x - player.rect.x), int(pos_cano_cima[1] - player.rect.y))
+    offset_baixo = (int(cano_x - player.rect.x), int(pos_cano_baixo[1] - player.rect.y))
+
+    colisao_cima = player.mask.overlap(mask_pipe_top, offset_cima)
+    colisao_baixo = player.mask.overlap(mask_pipe_bottom, offset_baixo)
+
+    if colisao_cima or colisao_baixo:
+        print("COLISÃO!")
+        colisao_texto = font.render(f"COLISÃO!", True, RED)
+        window.blit(colisao_texto, (50, 50))
+        game = False
+
     pygame.display.update()
 
 pygame.quit()
