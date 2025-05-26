@@ -3,19 +3,23 @@ from os import path
 import os
 import random
 
-from config import WIDTH, HEIGHT, FPS, WHITE, BLACK, BLUE, DARK_BLUE, RED
+from config import WIDTH, HEIGHT, FPS, WHITE, BLACK, BLUE, DARK_BLUE, RED, touch
 
 BIRD_WIDTH = 90
 BIRD_HEIGHT = 130
 
 pygame.init()
+pygame.mixer.init()
+pygame.mixer.music.load("assets/sound/mushroom.mp3")
+pygame.mixer.music.play()
 
+fundo_estado = "nivel_1"
 window = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption('Tappy Wings')
 cano_x = WIDTH
 
-pipe_top = pygame.image.load("assets/img/pipe_top.png")
-pipe_bottom = pygame.image.load("assets/img/pipe_bottom.png")
+pipe_top = pygame.image.load("assets/img/new_obstacle_top.png")
+pipe_bottom = pygame.image.load("assets/img/new_obstacle_bottom.png")
 
 mask_pipe_top = pygame.mask.from_surface(pipe_top)
 mask_pipe_bottom = pygame.mask.from_surface(pipe_bottom)
@@ -68,6 +72,10 @@ class passaro(pygame.sprite.Sprite):
             self.frame_index = (self.frame_index + 1) % len(self.frames)
             self.image = pygame.transform.scale(self.frames[self.frame_index], (BIRD_WIDTH, BIRD_HEIGHT))
             self.mask = pygame.mask.from_surface(self.image)
+
+        if fundo_estado == "nivel_3":
+            self.gravity = -0.004491
+            self.jump_strength = 0.7
 
         if self.speedy > 10:
             self.speedy = 10
@@ -153,6 +161,7 @@ while game:
     if segundos >= 45 and not fundo_estado == "nivel_2" and not fundo_estado == "nivel_3":
         image = pygame.image.load('assets/img/fase2.png').convert()
         background = pygame.transform.scale(image, (WIDTH, HEIGHT))
+        cano_x = 2.5
         fundo_estado = "nivel_2"
 
     elif (minutos == 1 and segundos >= 30) and not fundo_estado == "nivel_3":
@@ -188,6 +197,9 @@ while game:
         print("COLISÃO!")
         colisao_texto = font.render(f"COLISÃO!", True, RED)
         window.blit(colisao_texto, (50, 50))
+        game = False
+
+    if (minutos == 2 and segundos == 30):
         game = False
 
     pygame.display.update()

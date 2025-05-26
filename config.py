@@ -12,3 +12,6 @@ GREEN = (0, 255, 0)
 BLUE = (100, 149, 237)
 YELLOW = (255, 255, 0)
 DARK_BLUE = (0, 0, 139)
+
+mushroom = "assets/sound/mushroom.mp3"
+touch = "assets/vgmenuhighlight.ogg"

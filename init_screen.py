@@ -1,10 +1,14 @@
 import pygame
 from os import path
 import os
+from config import mushroom
 
 from config import WIDTH, HEIGHT, FPS, WHITE, BLACK, BLUE
 
 pygame.init()
+pygame.mixer.init()
+pygame.mixer.music.load(mushroom)
+pygame.mixer.music.play()
 
 # ----- Gera tela principal
 window = pygame.display.set_mode((WIDTH, HEIGHT))
