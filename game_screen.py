@@ -11,7 +11,7 @@ BIRD_HEIGHT = 130
 pygame.init()
 pygame.mixer.init()
 pygame.mixer.music.load("assets/sound/mushroom.mp3")
-pygame.mixer.music.play()
+pygame.mixer.music.play(-1)
 
 fundo_estado = "nivel_1"
 window = pygame.display.set_mode((WIDTH, HEIGHT))
@@ -162,11 +162,15 @@ while game:
         image = pygame.image.load('assets/img/fase2.png').convert()
         background = pygame.transform.scale(image, (WIDTH, HEIGHT))
         cano_x = 2.5
+        pipe_top = pygame.image.load("assets/img/new_obstacle_top_n2.png")
+        pipe_bottom = pygame.image.load("assets/img/new_obstacle_bottom_n2.png")
         fundo_estado = "nivel_2"
 
-    elif (minutos == 1 and segundos >= 30) and not fundo_estado == "nivel_3":
+    if (minutos == 1 and segundos >= 30) and not fundo_estado == "nivel_3":
         image = pygame.image.load('assets/img/fase3.png').convert()
         background = pygame.transform.scale(image, (WIDTH, HEIGHT))
+        pipe_top = pygame.image.load("assets/img/new_obstacle_top_n3 (3).png")
+        pipe_bottom = pygame.image.load("assets/img/new_obstacle_bottom_n3.png")
         fundo_estado = "nivel_3"
     
     cano_x -= 0.5
@@ -195,8 +199,6 @@ while game:
 
     if colisao_cima or colisao_baixo:
         print("COLISÃO!")
-        colisao_texto = font.render(f"COLISÃO!", True, RED)
-        window.blit(colisao_texto, (50, 50))
         game = False
 
     if (minutos == 2 and segundos == 30):

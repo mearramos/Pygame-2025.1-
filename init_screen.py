@@ -3,36 +3,45 @@ from os import path
 import os
 from config import mushroom
 
-from config import WIDTH, HEIGHT, FPS, WHITE, BLACK, BLUE
-
+from config import WIDTH, HEIGHT, FPS, WHITE, BLACK, BLUE, DARK_BLUE, GREEN, DARK_GREEN
 pygame.init()
 pygame.mixer.init()
 pygame.mixer.music.load(mushroom)
-pygame.mixer.music.play()
+pygame.mixer.music.play(-1)
+
+WIDTH_RET, HEIGH_RET = 800, 600
+cor_retangulo = (100, 149, 237, 180)
+ret_surf = pygame.Surface((WIDTH_RET, HEIGH_RET), pygame.SRCALPHA)
+pygame.draw.rect(ret_surf, cor_retangulo, ret_surf.get_rect(), border_radius=30)
 
 # ----- Gera tela principal
 window = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption('Tappy Wings')
 
 # ----- Carrega e ajusta fundo
-image = pygame.image.load('assets/img/background_inicial.png').convert()
+image = pygame.image.load('assets/img/Fase1.png').convert()
 background = pygame.transform.scale(image, (WIDTH, HEIGHT))
-
-#logo = pygame.image.load('assets/img/logo_tappy_wings.png').convert_alpha() #Logo para teste, substituição após término do design. 16/05.
-#logo_rect = pygame.transform.scale(logo, (WIDTH//2, HEIGHT//2 - 40))
-
+logo = pygame.image.load('assets/img/new_logo.png')
+birds_init = pygame.image.load('assets/img/birds_init.png').convert_alpha()
 
 # ----- Define fonte e mensagens
-font = pygame.font.Font('assets/fonte/fonte_principal.ttf', 34)
+font_titulo = pygame.font.Font('assets/fonte/fonte_principal.ttf', 50)
+font_msg = pygame.font.Font('assets/fonte/fonte_principal.ttf', 24)
 titulo = "Tappy Wings"
-mensagem = "Aperte ENTER para iniciar"
+mensagem = "ENTER para iniciar"
+sair = "S para sair"
+tutorial = "T para tutorial"
 
-text_title = font.render(titulo, True, BLUE)
-text_msg = font.render(mensagem, True, BLUE)
+text_title = font_titulo.render(titulo, True, WHITE)
+text_msg = font_msg.render(mensagem, True, WHITE)
+text_sair = font_msg.render(sair, True, WHITE)
+text_tutorial = font_msg.render(tutorial, True, WHITE)
 
 # ----- Centraliza textos na tela
-title_rect = text_title.get_rect(center=(WIDTH // 2, HEIGHT // 2 - 40))
-msg_rect = text_msg.get_rect(center=(WIDTH // 2, HEIGHT // 2 + 260))
+title_rect = text_title.get_rect(center=(WIDTH // 2, HEIGHT // 2 - 200))
+msg_rect = text_msg.get_rect(center=(WIDTH // 2 - 100, HEIGHT // 2 + 260))
+sair_rect = text_msg.get_rect(center=(WIDTH//2 - 100, HEIGHT//2 + 224))
+tutorial_rect = text_msg.get_rect(center=(WIDTH//2 - 100, HEIGHT//2 + 190))
 
 
 # ----- Loop da tela inicial
@@ -46,10 +55,16 @@ while game and not start:
         elif event.type == pygame.KEYDOWN and event.key == pygame.K_RETURN:
             start = True
 
+    x = (WIDTH - WIDTH_RET) // 2
+    y = (HEIGHT - HEIGH_RET) // 2
+    window.fill(BLUE)
     window.blit(background, (0, 0))
-    # window.blit(text_title, title_rect)
+    window.blit(ret_surf, (x, y))
+    window.blit(text_title, title_rect)
     window.blit(text_msg, msg_rect)
-    #window.blit(logo, (150, 150))
+    window.blit(text_sair, sair_rect)
+    window.blit(text_tutorial, tutorial_rect)
+    window.blit(birds_init, (WIDTH//2 - 340, HEIGHT//2 - 200))
     pygame.display.update()
 
 pygame.quit()
