@@ -24,7 +24,8 @@
 
 ## Demonstração + link
 
-[Clique aqui para assistir](https://youtu.be/ceW-A-YbAzE?si=ngDQC64awDsXzBNK)
+[![Assista no YouTube](https://img.youtube.com/vi/ceW-A-YbAzE/hqdefault.jpg)](https://youtu.be/ceW-A-YbAzE)
+
 
 ## Referência
 
