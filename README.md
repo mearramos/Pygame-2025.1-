@@ -25,19 +25,15 @@
 ## Referência
 
  - [Tutorial | Pygame](https://insper.github.io/DesignDeSoftware/pygame/handout/)
+ - [StackOverFlow](https://stackoverflow.com/questions)
+ - [Documentação Pygame](https://www.pygame.org/docs/ref/image.html)
+ - [Ameaça Interestelar | Jogo Espacial](https://github.com/MicaeleGomes/Ameaca-Interestelar-Jogo-Espacial)
 
 
 ## FAQ
 
-#### Como ganhar pontos?
-
-Resposta 1
-
-#### Como perder pontos?
-
-Resposta 2
-
-
+#### Como funciona?
+O jogador deve passar pelas três fases no jogo, estas que tem a dificuldade aumentada através da velocidade dos canos. Cada fase tem duração de 45 segundos, com mudança de cenário e design dos obstáculos. 
 
 ![Logo](Logo_Insper.png)
 
