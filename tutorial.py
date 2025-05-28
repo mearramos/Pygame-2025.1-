@@ -10,12 +10,12 @@ QUIT = 2
 FINAL = 3
 TUTORIAL = 4
 
-def init_screen(window):
+def tutorial_screen(window):
     clock = pygame.time.Clock()
     pygame.init()
     pygame.mixer.init()
     pygame.mixer.music.load(final_music)
-    pygame.mixer.music.play(-1)
+    # pygame.mixer.music.play(-1)
 
     WIDTH_RET, HEIGH_RET = 800, 600
     cor_retangulo = (100, 149, 237, 180)
@@ -35,21 +35,24 @@ def init_screen(window):
     # ----- Define fonte e mensagens
     font_titulo = pygame.font.Font('assets/fonte/fonte_principal.ttf', 50)
     font_msg = pygame.font.Font('assets/fonte/fonte_principal.ttf', 24)
-    titulo = "Tappy Wings"
-    mensagem = "T para tutorial"
-    sair = "pelos três níveis"
-    tutorial = "Ajude Tap a passar"
+    titulo = "TUTORIAL"
+    mensagem = "SPACE para voar"
+    sair = "S para sair"
+    tutorial = "ENTER para iniciar"
+    retornar_inicio = "R para voltar ao início"
 
     text_title = font_titulo.render(titulo, True, WHITE)
     text_msg = font_msg.render(mensagem, True, WHITE)
     text_sair = font_msg.render(sair, True, WHITE)
     text_tutorial = font_msg.render(tutorial, True, WHITE)
+    text_inicio = font_msg.render(retornar_inicio, True, WHITE)
 
     # ----- Centraliza textos na tela
     title_rect = text_title.get_rect(center=(WIDTH // 2, HEIGHT // 2 - 200))
-    msg_rect = text_msg.get_rect(center=(WIDTH // 2, HEIGHT // 2 + 290))
-    sair_rect = text_msg.get_rect(center=(WIDTH//2 - 25, HEIGHT//2 + 50))
-    tutorial_rect = text_msg.get_rect(center=(WIDTH//2 - 25, HEIGHT//2 + 20))
+    msg_rect = text_msg.get_rect(center=(WIDTH // 2 - 100, HEIGHT // 2 + 260))
+    sair_rect = text_msg.get_rect(center=(WIDTH//2 - 100, HEIGHT//2 + 224))
+    tutorial_rect = text_msg.get_rect(center=(WIDTH//2 - 100, HEIGHT//2 + 190))
+    inicio_rect = text_msg.get_rect(center=(WIDTH//2 - 100, HEIGHT//2 + 155))
 
 
     # ----- Loop da tela inicial
@@ -61,19 +64,20 @@ def init_screen(window):
         clock.tick(FPS)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                state = QUIT
                 game = False
+            if event.type == pygame.QUIT:
+                return QUIT
             if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_RETURN:
-                    state = GAME
-                    start = True
-                elif event.key == pygame.K_s:
-                    state = QUIT
-                    start = True  
-                elif event.key == pygame.K_t:
-                    state = TUTORIAL
-                    start = True  
+                if event.key == pygame.K_s:
+                    return QUIT
+            if event.key == pygame.K_RETURN:
+                return GAME
+            if event.key == pygame.K_t:
+                return TUTORIAL
+            if event.key == pygame.K_r:
+                return INIT
 
+            
         x = (WIDTH - WIDTH_RET) // 2
         y = (HEIGHT - HEIGH_RET) // 2
         window.fill(BLUE)
@@ -83,7 +87,8 @@ def init_screen(window):
         window.blit(text_msg, msg_rect)
         window.blit(text_sair, sair_rect)
         window.blit(text_tutorial, tutorial_rect)
-        window.blit(birds_init, (WIDTH//2 - 340, HEIGHT//2 - 300))
+        window.blit(birds_init, (WIDTH//2 - 340, HEIGHT//2 - 200))
+        window.blit(text_inicio, inicio_rect)
         pygame.display.update()
     return state
 

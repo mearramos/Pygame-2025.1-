@@ -2,7 +2,7 @@ import pygame
 
 WIDTH = 1000  # Largura da tela
 HEIGHT = 750  # Altura da tela
-FPS = 30 # Frames por segundo
+FPS = 1000 # Frames por segundo
 
 # Define algumas variáveis com as cores básicas
 WHITE = (255, 255, 255)
@@ -16,3 +16,4 @@ DARK_BLUE = (0, 0, 139)
 
 mushroom = "assets/sound/mushroom.mp3"
 touch = "assets/vgmenuhighlight.ogg"
+final_music = "assets/sound/1-05. Littleroot Town.mp3"
