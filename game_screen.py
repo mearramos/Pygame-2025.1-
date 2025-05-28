@@ -219,9 +219,9 @@ def game_screen(window):
         # ----- Desenha fundo, sprites e canos
         window.blit(background, (0, 0))
         all_sprites.draw(window)
-        window.blit(texto_tempo, (10, 10))
         window.blit(pipe_top, pos_cano_cima)
         window.blit(pipe_bottom, pos_cano_baixo)
+        window.blit(texto_tempo, (10, 10))
 
         # ----- Verifica colisões com canos
         offset_cima = (int(cano_x - player.rect.x), int(pos_cano_cima[1] - player.rect.y))
