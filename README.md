@@ -1,7 +1,7 @@
 # Pygame-2025.1-
 
 
-# Nome do jogo
+# Tappy Wings
 
 
 
