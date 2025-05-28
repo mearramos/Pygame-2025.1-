@@ -24,7 +24,7 @@
 
 ## Demonstração + link
 
-![Jogo](assets/img/jogo.jpg)
+[Clique aqui para assistir](https://youtu.be/ceW-A-YbAzE?si=ngDQC64awDsXzBNK)
 
 ## Referência
 
