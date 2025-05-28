@@ -24,7 +24,7 @@
 
 ## Demonstração + link
 
-![Jogo](jogo.jpg)
+![Jogo](assets/img/jogo.jpg)
 
 ## Referência
 
@@ -39,5 +39,5 @@
 #### Como funciona?
 O jogador deve passar pelas três fases no jogo, estas que tem a dificuldade aumentada através da velocidade dos canos. Cada fase tem duração de 45 segundos, com mudança de cenário e design dos obstáculos. 
 
-![Logo](Logo_Insper.png)
+![Logo](assets/img/Logo_Insper.png)
 
