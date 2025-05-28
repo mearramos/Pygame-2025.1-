@@ -24,8 +24,7 @@
 
 ## Demonstração + link
 
-*Insira um gif ou um link de alguma demonstração*
-
+![Jogo](jogo.jpg)
 
 ## Referência
 
