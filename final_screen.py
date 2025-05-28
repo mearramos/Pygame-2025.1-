@@ -69,8 +69,6 @@ def final_screen(window):
                     return GAME  
                 if event.key == pygame.K_t:
                     return TUTORIAL
-
-
             
         x = (WIDTH - WIDTH_RET) // 2
         y = (HEIGHT - HEIGH_RET) // 2

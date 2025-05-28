@@ -6,25 +6,28 @@ if __name__ == "__main__":
     from final_screen import final_screen
     from tutorial import tutorial_screen
    
-
+    # ----- Define constantes para representar os diferentes estados do jogo
     INIT = 0
     GAME = 1
     QUIT = 2
     FINAL = 3
     TUTORIAL = 4
 
+    # ----- Inicializa os módulos do Pygame
     pygame.init()
     pygame.mixer.init()
 
-    # Define tela cheia
+    # ----- Define tela cheia
     window = pygame.display.set_mode((WIDTH, HEIGHT))
 
-    # Gera tela principal
+    # ----- Gera tela principal
     pygame.display.set_caption('Tappy Wings')
 
+    # ----- Variáveis de controle
     game = True
     state = INIT
 
+    # ----- Loop principal do jogo, executa até o estado ser QUIT
     while state != QUIT:
         if state == INIT:
             state = init_screen(window)
