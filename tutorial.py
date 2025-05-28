@@ -64,18 +64,18 @@ def tutorial_screen(window):
         clock.tick(FPS)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
+                state = QUIT
                 game = False
-            if event.type == pygame.QUIT:
-                return QUIT
             if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_RETURN:
+                    state = GAME
+                    start = True
                 if event.key == pygame.K_s:
-                    return QUIT
-            if event.key == pygame.K_RETURN:
-                return GAME
-            if event.key == pygame.K_t:
-                return TUTORIAL
-            if event.key == pygame.K_r:
-                return INIT
+                    state = QUIT
+                    start = True  
+                if event.key == pygame.K_r:
+                    state = INIT
+                    start = True
 
             
         x = (WIDTH - WIDTH_RET) // 2

@@ -47,9 +47,9 @@ def init_screen(window):
 
     # ----- Centraliza textos na tela
     title_rect = text_title.get_rect(center=(WIDTH // 2, HEIGHT // 2 - 200))
-    msg_rect = text_msg.get_rect(center=(WIDTH // 2, HEIGHT // 2 + 290))
-    sair_rect = text_msg.get_rect(center=(WIDTH//2 - 25, HEIGHT//2 + 50))
-    tutorial_rect = text_msg.get_rect(center=(WIDTH//2 - 25, HEIGHT//2 + 20))
+    msg_rect = text_msg.get_rect(center=(WIDTH // 2, HEIGHT // 2 + 170))
+    sair_rect = text_msg.get_rect(center=(WIDTH//2 - 110, HEIGHT//2 + 50))
+    tutorial_rect = text_msg.get_rect(center=(WIDTH//2 - 110, HEIGHT//2 + 20))
 
 
     # ----- Loop da tela inicial
@@ -67,10 +67,10 @@ def init_screen(window):
                 if event.key == pygame.K_RETURN:
                     state = GAME
                     start = True
-                elif event.key == pygame.K_s:
+                if event.key == pygame.K_s:
                     state = QUIT
                     start = True  
-                elif event.key == pygame.K_t:
+                if event.key == pygame.K_t:
                     state = TUTORIAL
                     start = True  
 

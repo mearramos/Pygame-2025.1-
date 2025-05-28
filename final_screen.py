@@ -35,7 +35,7 @@ def final_screen(window):
     # ----- Define fonte e mensagens
     font_titulo = pygame.font.Font('assets/fonte/fonte_principal.ttf', 50)
     font_msg = pygame.font.Font('assets/fonte/fonte_principal.ttf', 24)
-    titulo = "fIM DE JOGO"
+    titulo = "FIM DE JOGO"
     mensagem = "ENTER para reiniciar"
     sair = "S para sair"
     tutorial = "T para tutorial"
