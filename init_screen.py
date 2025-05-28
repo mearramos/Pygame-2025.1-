@@ -38,7 +38,7 @@ def init_screen(window):
     titulo = "Tappy Wings"
     mensagem = "T para tutorial"
     sair = "pelos três níveis"
-    tutorial = "Ajude Tap a passar"
+    tutorial = "Ajude Knight Bird a passar"
 
     text_title = font_titulo.render(titulo, True, WHITE)
     text_msg = font_msg.render(mensagem, True, WHITE)
